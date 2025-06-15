@@ -1,0 +1,51 @@
+Escolha do escopo do projeto: Um sistema de Cartão ponto.
+O sistema deve possuir uma caixa de login de entrada e opção de criar uma nova conta.
+devem existir 2 tipos de conta, COnta Admisistrador e Conta funcionário.
+Para o cadastro de conta funcionario é necessário apenas o nome, whatsApp e cpf da pessoa e criação de uma senha. O login deve ser gerado automaticamente pelo sistema, sendo uma sequencia de números.
+A Conta Administrador deve possuir acesso e controle para acessar as informações das contas Funcionário. A Conta Administrador não pode alterar informações, apenas acessar visualizar e deletar contas Funcionário.
+Dentro da Conta Funcionário o usuário deve ter acesso a seus dados: Nome, whatsApp, CPF, Salario, Cargo Função, carga horaria.
+Salario, CArgo Função, Carga Horaria devem ser adicionados a conta Funcionário apenas pela conta Administrador.
+A Conta Funcionário deve ter a função de visualizar os dados cadastrais além de possuir a função de registrar o cartão ponto mensal.
+A conta Funcionário deverá mostrar o registro do cartão ponto do mês e de todos os meses que se passaram no ano em questão. A conta Funcionário deve ter acesso apenas a seus dados e cartão ponto.
+O Sistema devera oferecer a opção de registrar catão ponto na Conta Funcionário em todos os dias do mês. Não sendo obrigatório o preenchimento de todos os dias.
+Cartão ponto deve ter o campo data/mês/ano (00/00/00), horário de entrada:   , horário saída almoço:  , horário volta almoço:  , horário saída:  , também deve conter o dia em que foi feito o registro assim como o somatório de horas normais e o somatório de horas extras do dia.
+as informações do cartão ponto devem estar dispostas em formato de tabela onde no final deve mostrar o total de horas trabalhadas no mês, horas normais trabalhadas, total de horas extras, total de dias trabalhados.
+
+banco de dados:
+
+Tabela funcionários:
+nome/cpf/whatsapp/cargofunção/senha/chavekey(numero de login) deve ser gerada automaticamente ao criar a conta.
+tabela Administrador:
+Nome/cpf/senha
+
+tabela Salario/Funcionário( deve ser acessada apenas pela Conta Funcionário):
+Para cada nova conta Funcionário deve ser criada um novo campo na tabela Salario/Funcionário que de deve conter: Nome/cpf/numero da conta Funcionário e deve possuir campo salário onde a Conta Administrador devera preencher com o salario do funcionário e o campo carga horaria que deve ser preenchido pela conta Administrador
+
+
+O banco de dados devera guardar as informações por durante 13 meses ( sendo 12 meses para registro e um mês antes da exlução do histórico).
+banco de dados deve possuir os seguintes campos: 
+tabela mês: ( 12 tabelas uma para cada mês do ano)
+tabela mês deve possuir 31 dias, começando no dia 27, 28, 29, 30, 31,01, 02....26
+O prazo para preencher cada tabela mês deve ser até o dia 26 de cada mês, após deve ser bloqueada a tabela para o ussuario realizar alterações.
+Não deve permitir alteração na tabela mês após o funcionário fazer o registro no campos.
+A tabela mês deve conter os campos:
+cabeçalho com o mês em questão, nome do funcionário cpf e numero de login;
+data: dia.mes.ano; horário/entrada; horariosaidaalmoço; horaiovoltaalmoço; horariosaida; totalhorastrabalhadas; horasextras;
+total de dias trabalhados no mes; total de horas trabalhadas no mês; total de horas extras no mês;
+para cada Conta Funcionário deve ser criada um tabela mês. 
+A conta Administrador teve ter acesso para visualizar as tabelas mês do banco de dados através do numero de login da COnta Funcionário.
+
+
+
+
+
+
+Seleção da plataforma: Desktop/web.
+
+Definição das tecnologias: Python/html e sql.
+
+Criação de diagramas iniciais de UML e MER: 
+
+Elaboração do cronograma inicial: Criação do projeto, elaboração dos requisitos, criação do banco de dados, criação do código da aplicação, implementação.
+
+ Conta no GitLab ou GitHub: 
