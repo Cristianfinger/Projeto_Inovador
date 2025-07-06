@@ -1,0 +1,153 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', Arial, sans-serif;
+    background-color: #ffffff;
+    color: #333;
+    min-height: 100vh;
+}
+
+header {
+    background-color: #5ff3e6;
+    color: #000;
+    padding: 20px;
+    text-align: center;
+    font-size: 1.6rem;
+    font-weight: bold;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+h1, h2, h3 {
+    color: #222;
+    margin-bottom: 20px;
+}
+
+.btn {
+    background-color: #5ff3e6;
+    color: #000;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: 500;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn:hover {
+    background-color: #3bd9c9;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table th, table td {
+    border: 1px solid #ddd;
+    padding: 12px 16px;
+    text-align: left;
+}
+
+table th {
+    background-color: #5ff3e6;
+    color: #000;
+    font-weight: bold;
+}
+
+table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* Formulários */
+form label {
+    display: block;
+    margin-top: 15px;
+    font-weight: 500;
+}
+
+form input[type="text"],
+form input[type="password"],
+form input[type="number"],
+form input[type="date"],
+form select,
+form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+form textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+
+.alert {
+    padding: 15px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.alert.erro {
+    background-color: #fdd;
+    color: #900;
+    border: 1px solid #d33;
+}
+
+.alert.sucesso {
+    background-color: #d4fcdc;
+    color: #087f23;
+    border: 1px solid #34c759;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #f1f1f1;
+    margin-top: 40px;
+    color: #666;
+    font-size: 0.9rem;
+
+table.tabela {
+    width: 90%;
+    max-width: 800px;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0,0,0,0.05);
+}
+
+table.tabela th, table.tabela td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+table.tabela th {
+    background-color: #3498db;
+    color: white;
+}
+
+table.tabela tr:hover {
+    background-color: #f1f1f1;
+}

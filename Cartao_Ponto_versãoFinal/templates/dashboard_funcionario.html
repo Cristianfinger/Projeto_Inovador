@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Dashboard Funcionário</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <h2>Bem-vindo, {{ user.nome }}!</h2>
+
+  <h3>Seus registros de ponto:</h3>
+  <table border="1" cellpadding="8" cellspacing="0">
+    <tr>
+      <th>Data</th>
+      <th>Entrada</th>
+      <th>Saída almoço</th>
+      <th>Retorno almoço</th>
+      <th>Saída</th>
+      <th>Horas normais</th>
+      <th>Horas extras</th>
+    </tr>
+    {% for reg in registros %}
+    <tr>
+      <td>{{ reg.data.strftime('%d/%m/%Y') }}</td>
+      <td>{{ reg.entrada }}</td>
+      <td>{{ reg.saida_almoco }}</td>
+      <td>{{ reg.retorno_almoco }}</td>
+      <td>{{ reg.saida }}</td>
+      <td>{{ reg.horas_normais }}</td>
+      <td>{{ reg.horas_extras }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+
+  <p><a href="{{ url_for('registrar_ponto') }}">Registrar novo ponto</a></p>
+
+  <p><a href="{{ url_for('login') }}">Logout</a></p>
+</body>
+</html>

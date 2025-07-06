@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Registros de {{ funcionario.nome }}</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 30px;
+        }
+        h1 {
+            color: #333;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #999;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #007BFF;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>Cartão Ponto - {{ funcionario.nome }}</h1>
+
+    {% if registros %}
+    <table>
+        <thead>
+            <tr>
+                <th>Data</th>
+                <th>Entrada</th>
+                <th>Saída Almoço</th>
+                <th>Retorno Almoço</th>
+                <th>Saída</th>
+                <th>Horas Normais</th>
+                <th>Horas Extras</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for r in registros %}
+            <tr>
+                <td>{{ r.data.strftime('%d/%m/%Y') }}</td>
+                <td>{{ r.entrada or '-' }}</td>
+                <td>{{ r.saida_almoco or '-' }}</td>
+                <td>{{ r.retorno_almoco or '-' }}</td>
+                <td>{{ r.saida or '-' }}</td>
+                <td>{{ r.horas_normais or 0 }}</td>
+                <td>{{ r.horas_extras or 0 }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>Este funcionário ainda não possui registros de ponto.</p>
+    {% endif %}
+
+    <a href="/admin">← Voltar ao painel do administrador</a>
+</body>
+</html>
