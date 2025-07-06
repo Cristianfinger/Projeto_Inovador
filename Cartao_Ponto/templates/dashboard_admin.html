@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Dashboard Administrador</title>
+  
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+
+</head>
+<body>
+  <h2>Bem-vindo, Administrador!</h2>
+
+  <h3>Lista de Funcionários:</h3>
+  <table border="1" cellpadding="8" cellspacing="0">
+    <tr>
+      <th>ID</th>
+      <th>Nome</th>
+      <th>CPF</th>
+      <th>WhatsApp</th>
+    </tr>
+    {% for func in funcionarios %}
+    <tr>
+      <td>{{ func.id }}</td>
+      <td>{{ func.nome }}</td>
+      <td>{{ func.cpf }}</td>
+      <td>{{ func.whatsapp }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+  <a href="/admin/registros_por_funcionario">  Ver registros agrupados por funcionário</a>
+  <p><a href="{{ url_for('cadastrar_funcionario') }}">Cadastrar Novo Funcionário</a></p>
+  <p><a href="{{ url_for('login') }}">Logout</a></p>
+</body>
+</html>

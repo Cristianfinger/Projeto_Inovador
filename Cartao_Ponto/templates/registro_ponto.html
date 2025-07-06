@@ -1,0 +1,40 @@
+<!-- templates/registro_ponto.html -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <title>Registrar Ponto</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        form { max-width: 400px; }
+        label { display: block; margin-top: 10px; }
+        input, button { width: 100%; padding: 8px; margin-top: 5px; }
+        button { background-color: #4CAF50; color: white; border: none; cursor: pointer; }
+        button:hover { background-color: #45a049; }
+    </style>
+</head>
+<body>
+    <h1>Registrar Ponto</h1>
+    <form method="POST" action="/registrar">
+        <label for="data">Data:</label>
+        <input type="date" id="data" name="data" required>
+
+        <label for="entrada">Entrada:</label>
+        <input type="time" id="entrada" name="entrada">
+
+        <label for="saida_almoco">Saída para Almoço:</label>
+        <input type="time" id="saida_almoco" name="saida_almoco">
+
+        <label for="retorno_almoco">Retorno do Almoço:</label>
+        <input type="time" id="retorno_almoco" name="retorno_almoco">
+
+        <label for="saida">Saída:</label>
+        <input type="time" id="saida" name="saida">
+
+        <button type="submit">Registrar</button>
+    </form>
+    <p><a href="/funcionario">Voltar ao Dashboard</a></p>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Cadastrar Funcionário</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+  <h2>Cadastrar Novo Funcionário</h2>
+
+  <form method="POST" action="{{ url_for('cadastrar_funcionario') }}">
+    <input name="nome" placeholder="Nome completo" required />
+    <input name="cpf" placeholder="CPF" required />
+    <input name="whatsapp" placeholder="WhatsApp" />
+    <input name="senha" placeholder="Senha" type="password" required />
+    <button type="submit">Cadastrar</button>
+  </form>
+
+  <p><a href="{{ url_for('admin_dashboard') }}">Voltar ao Dashboard</a></p>
+</body>
+</html>

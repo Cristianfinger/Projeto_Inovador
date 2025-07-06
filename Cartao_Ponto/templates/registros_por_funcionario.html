@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Registros por Funcionário</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 30px;
+        }
+        h1 {
+            margin-bottom: 30px;
+        }
+        h2 {
+            margin-top: 40px;
+            color: #333;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 10px;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px 12px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .sem-registros {
+            font-style: italic;
+            color: #666;
+        }
+        a {
+            display: inline-block;
+            margin-top: 30px;
+            text-decoration: none;
+            color: #007BFF;
+        }
+    </style>
+</head>
+<body>
+    <h1>Registros de Ponto por Funcionário</h1>
+
+    {% for f in funcionarios %}
+        <h2>{{ f.nome }}</h2>
+
+        {% if f.registros %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Data</th>
+                        <th>Entrada</th>
+                        <th>Saída Almoço</th>
+                        <th>Retorno Almoço</th>
+                        <th>Saída</th>
+                        <th>Horas Normais</th>
+                        <th>Horas Extras</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for r in f.registros %}
+                    <tr>
+                        <td>{{ r.data.strftime('%d/%m/%Y') }}</td>
+                        <td>{{ r.entrada or '-' }}</td>
+                        <td>{{ r.saida_almoco or '-' }}</td>
+                        <td>{{ r.retorno_almoco or '-' }}</td>
+                        <td>{{ r.saida or '-' }}</td>
+                        <td>{{ r.horas_normais or 0 }}</td>
+                        <td>{{ r.horas_extras or 0 }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p class="sem-registros">Nenhum registro de ponto encontrado para este funcionário.</p>
+        {% endif %}
+    {% endfor %}
+
+    <a href="/admin">← Voltar ao painel do administrador</a>
+</body>
+</html>
