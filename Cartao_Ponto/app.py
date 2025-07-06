@@ -2,11 +2,13 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask import Flask, request, session, redirect, render_template
 from datetime import datetime
+from datetime import datetime, timedelta
+from flask import Flask, request, session, redirect, render_template, flash
 
 
 app = Flask(__name__)
 
-# Caminho completo para o arquivo do banco de dados SQLite
+# Caminho banco de dados SQLite
 app.secret_key = 'abc123'
 app.config['SQLALCHEMY_DATABASE_URI'] = r'sqlite:///C:/Users/User/OneDrive/Área de Trabalho/Cartao_Ponto/cartaoponto.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -78,11 +80,11 @@ def funcionario_dashboard():
     return render_template('dashboard_funcionario.html', user=user, registros=registros)
 
 # Registro de ponto
-@app.route('/registrar', methods=['GET', 'POST'])
+@app.route('/registrar_ponto', methods=['GET', 'POST'])
 def registrar_ponto():
     if session.get('tipo') != 'funcionario':
         return redirect('/')
-    
+
     if request.method == 'POST':
         entrada = request.form['entrada']
         saida_almoco = request.form['saida_almoco']
@@ -91,28 +93,53 @@ def registrar_ponto():
         data_str = request.form['data']
         funcionario_id = session['user_id']
 
-        data_obj = datetime.strptime(data_str, '%Y-%m-%d').date()
+        if not all([entrada, saida_almoco, retorno_almoco, saida, data_str]):
+            flash("Todos os horários (entrada, almoço e saída) devem ser preenchidos.", "danger")
+            return redirect('/registrar_ponto')
 
-        # Cálculo de horas (exemplo)
-        horas_normais = 8.0
-        horas_extras = 0.0
+        try:
+            data_obj = datetime.strptime(data_str, '%Y-%m-%d').date()
 
-        novo = RegistroPonto(
-            funcionario_id=funcionario_id,
-            data=data_obj,
-            entrada=entrada,
-            saida_almoco=saida_almoco,
-            retorno_almoco=retorno_almoco,
-            saida=saida,
-            horas_normais=horas_normais,
-            horas_extras=horas_extras,
-            data_registro=datetime.now()
-        )
-        db.session.add(novo)
-        db.session.commit()
-        return redirect('/funcionario')
-    
-    return render_template('registro_ponto.html')
+            entrada_dt = datetime.combine(data_obj, datetime.strptime(entrada, '%H:%M').time())
+            saida_almoco_dt = datetime.combine(data_obj, datetime.strptime(saida_almoco, '%H:%M').time())
+            retorno_almoco_dt = datetime.combine(data_obj, datetime.strptime(retorno_almoco, '%H:%M').time())
+            saida_dt = datetime.combine(data_obj, datetime.strptime(saida, '%H:%M').time())
+
+            # Cálculo das horas
+            manha = saida_almoco_dt - entrada_dt
+            tarde = saida_dt - retorno_almoco_dt
+            total_trabalhado = manha + tarde
+            total_horas = total_trabalhado.total_seconds() / 3600
+
+            horas_normais = round(min(total_horas, 8.0), 2)
+            horas_extras = round(max(total_horas - 8.0, 0.0), 2)
+
+            print(f"[DEBUG] Total trabalhado: {total_horas:.2f}h")
+            print(f"[DEBUG] Horas normais: {horas_normais}h")
+            print(f"[DEBUG] Horas extras: {horas_extras}h")
+
+            novo = RegistroPonto(
+                funcionario_id=funcionario_id,
+                data=data_obj,
+                entrada=entrada,
+                saida_almoco=saida_almoco,
+                retorno_almoco=retorno_almoco,
+                saida=saida,
+                horas_normais=horas_normais,
+                horas_extras=horas_extras,
+                data_registro=datetime.now()
+            )
+            db.session.add(novo)
+            db.session.commit()
+            flash("Ponto registrado com sucesso!", "success")
+            return redirect('/funcionario')
+
+        except ValueError:
+            flash("Erro ao processar os horários. Use o formato HH:MM corretamente.", "danger")
+            return redirect('/registrar_ponto')
+
+    return render_template('registrar_ponto.html')
+
 
 # Página do administrador
 @app.route('/admin')

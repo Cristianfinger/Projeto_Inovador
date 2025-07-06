@@ -127,4 +127,27 @@ footer {
     margin-top: 40px;
     color: #666;
     font-size: 0.9rem;
+
+table.tabela {
+    width: 90%;
+    max-width: 800px;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0,0,0,0.05);
+}
+
+table.tabela th, table.tabela td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+table.tabela th {
+    background-color: #3498db;
+    color: white;
+}
+
+table.tabela tr:hover {
+    background-color: #f1f1f1;
 }
